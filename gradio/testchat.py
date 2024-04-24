@@ -21,4 +21,4 @@ def response(message, history):
 
     return "I don't know the answer to that question."
 
-gr.ChatInterface(response).launch()
+gr.ChatInterface(response).launch(server_name="0.0.0.0")
