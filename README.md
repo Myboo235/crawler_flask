@@ -1,11 +1,15 @@
-# CRAWLER (FLASK,MONGODB,MONGO_EXPRESS)
+# CRAWLER (FLASK,MONGODB,MONGO_EXPRESS) & CHATBOT (GRADIO)
 ## Description
 - This is a simple api for web crawler using flask, mongodb.
 ## Folder structure
 ```
-    ├── app                     # Main folder
+    ├── api                     # API folder
     │    ├── app.py             # api file
     │    ├── template           # Template folder to show view
+    │    ├── ...    
+    ├── gradio                  # Chatbot folder
+    │    ├── testchat.py        # testchat file
+    │    ├── ...    
     ├── ...                    
     ├── Dockerfile                     
     ├── docker-compose.yml                    
@@ -32,8 +36,11 @@ After that run compose
 docker compose up
 ```
 And Hola:
-
+>API
 ![demo.png](./img/demo.png)
+
+>CHATBOT
+![chatbot.png](./img/chatbot.png)
 ---
 > Using local
 - You should have your mongo db run in local port 27017
@@ -42,10 +49,14 @@ pip install --no-cache-dir -r requirements.txt
 ```
 Run app
 ```bash
-cd app && flask run
+cd api && flask run
+```
+Run chatbot
+```bash
+cd gradio && python testchat.py
 ```
 ### Access database 
-> Using docker
+> Using docker (only)
 ![demo.png](./img/database.png)
-
+- or you can use [MongoDB Compass]("https://www.mongodb.com/products/tools/compass)
 ## That done!
