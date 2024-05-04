@@ -2,52 +2,62 @@
 name: 'crawler'
 services:
 
-  mongo:
-    image: mongo
-    container_name: crawler_mongo
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+  # mongo:
+  #   image: mongo
+  #   container_name: crawler_mongo
+  #   restart: always
+  #   ports:
+  #     - 27017:27017
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: root
 
-  mongo-express:
-    image: mongo-express
-    container_name: crawler_mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
-      ME_CONFIG_BASICAUTH: false
+  # mongo-express:
+  #   image: mongo-express
+  #   container_name: crawler_mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: root
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+  #     ME_CONFIG_BASICAUTH: false
 
-  api:
-    build:
-      context: .
-      dockerfile: api/Dockerfile
-    restart: always
-    ports:
-      - 5000:5000
-    depends_on:
-      - mongo
-    environment:
-      MONGO_URI: mongodb://root:root@mongo:27017/
-    volumes:
-      - "./api:/flask/app"
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: api/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - mongo
+  #   environment:
+  #     MONGO_URI: mongodb://root:root@mongo:27017/
+  #   volumes:
+  #     - "./api:/flask/app"
   
-  gradio:
+  # gradio:
+    # build:
+    #   context: .
+    #   dockerfile: gradio/Dockerfile
+    # restart: always
+    # ports:
+    #   - 7860:7860
+    # depends_on:
+    #   - ollama
+    # environment:
+    #   MONGO_URI: mongodb://root:root@mongo:27017/
+    # volumes:
+    #   - "./gradio/app.py:/gradio/app.py"
+    #   - "./gradio/testchat.py:/gradio/testchat.py"
+
+
+  ollama:
     build:
       context: .
-      dockerfile: gradio/Dockerfile
+      dockerfile: ollama/Dockerfile
     restart: always
     ports:
-      - 7860:7860
-    depends_on:
-      - mongo
-    environment:
-      MONGO_URI: mongodb://root:root@mongo:27017/
-    volumes:
-      - "./gradio:/gradio/app"
+      - 11434:11434

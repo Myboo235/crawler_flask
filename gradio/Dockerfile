@@ -1,9 +1,11 @@
-FROM python:3.8.0
+FROM python:3.10.12
 
 
 WORKDIR /gradio
 
-COPY requirements.txt .
+COPY ./gradio/requirements.txt .
+
+RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -11,4 +13,4 @@ COPY ./gradio/ .
 
 EXPOSE 7860
 
-CMD python testchat.py
+CMD gradio app.py

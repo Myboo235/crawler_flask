@@ -1,9 +1,11 @@
-FROM python:3.8.0
+FROM python:3.10.12
 
 
 WORKDIR /flask
 
-COPY requirements.txt .
+COPY ./flask/requirements.txt .
+
+RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir -r requirements.txt
 
