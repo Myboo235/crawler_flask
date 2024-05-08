@@ -7,8 +7,8 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY ./api/ .
 
 EXPOSE 5000
 
-CMD cd app && flask run --host=0.0.0.0 --debug
+CMD flask run --host=0.0.0.0 --debug
