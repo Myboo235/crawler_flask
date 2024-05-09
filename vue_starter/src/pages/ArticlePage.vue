@@ -1,12 +1,7 @@
 <script setup>
-import Hero from '../components/Hero.vue';
-import Article from '../components/Articles.vue';
+import Article from '../components/Article.vue'
 import MainLayout from '../layouts/MainLayout.vue';
-import Subscribe from '../components/Subscribe.vue';
-import Topics from '../components/Topics.vue';
-import CustomCursor from '../components/CustomCursor.vue'
-
-const childrenComponents = [Hero]; 
+const childrenComponents = [Article]; 
 </script>
 
 <template lang="">

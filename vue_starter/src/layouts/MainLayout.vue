@@ -17,8 +17,6 @@ defineProps(['childrens']);
             <component :is="child"/>
         </div>
         <Footer />
-
     </div>
-
 </template>
 <style scoped></style>
