@@ -47,23 +47,23 @@ def crawl():
     try:
         articles = []
         for article in soup.find_all("article"):
-            img = article.find("img")["src"]
-            title = article.find("h2").text
-            content = article.find("p").text
+            # img = article.find("img")["src"]
+            # title = article.find("h2").text
+            # content = article.find("p").text
             subpage = article.find("a")["href"]
         
             data = get_data(subpage)
         
 
             articles.append({
-                "title": title,
-                "img": img,
-                "content": content,
-                "subpage": {
+                # "title": title,
+                # "img": img,
+                # "content": content,
+                # "subpage": {
                     "title": data[0],
                     "img": data[1],
                     "content": data[2]
-                }
+                # }
             })
         
 
@@ -118,6 +118,12 @@ def delete():
         "deleted_count" : result.deleted_count
     }, 200
 
+@app.get('/<id>')
+
+
+def get_data_by_id(id):
+    data = collection.find_one({"_id": ObjectId(id)})
+    return json.loads(json_util.dumps(data)),200
 
 
 
