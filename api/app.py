@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from bson import json_util
 import json
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  as bs
 from uuid import uuid1
 
 app = Flask(__name__)
@@ -14,6 +14,25 @@ client = MongoClient("mongodb://root:root@mongo:27017/")
 
 db = client['crawl']
 collection = db['crawl_data']
+url = "https://spaceandbeyondbox.com/the-space-and-beyond-blog/"
+soup = bs(requests.get(url).content, "html.parser")
+
+
+def clean_text(texts):
+    for i in range(len(texts)):
+        texts[i] = texts[i].text.strip()
+    return texts
+   
+   
+def get_data(url):
+     
+    subpage_soup = bs(requests.get(url).content, "html.parser")
+    subpage_content = clean_text(subpage_soup.find("div", class_="entry-content").find_all("p"))
+    subpage_title = subpage_soup.find("div", class_="entry-content").find("h1").text.strip()
+    subpage_img = subpage_soup.find("span", class_="et_pb_image_wrap").find("img")["src"]
+    
+    return subpage_title, subpage_img, subpage_content
+
 
 @app.get('/')
 def index():
@@ -26,36 +45,31 @@ def crawl():
     if cnt > 0:
         return json.loads(json_util.dumps({"status":'success',"cnt":cnt})),200
     try:
-        url = "https://www.trivianerd.com/topic/solar-system-trivia#sun-trivia"
-        response = requests.get(url)
-        html_content = response.text
+        articles = []
+        for article in soup.find_all("article"):
+            # img = article.find("img")["src"]
+            # title = article.find("h2").text
+            # content = article.find("p").text
+            subpage = article.find("a")["href"]
+        
+            data = get_data(subpage)
+        
+
+            articles.append({
+                # "title": title,
+                # "img": img,
+                # "content": content,
+                # "subpage": {
+                    "title": data[0],
+                    "img": data[1],
+                    "content": data[2]
+                # }
+            })
+        
 
 
-        soup = BeautifulSoup(html_content, 'html.parser')
-
-        question_elements = soup.find_all("p", class_="font-bold")
-        questions = [question.text.replace("Question: ", "") for question in question_elements]
-
-        answer_elements = soup.find_all("p", {":class":"(blur && globalBlur) && 'blur-sm'"})
-        answers = [answer.text.replace("Answer: ", "") for answer in answer_elements]
-
-        topics = soup.find_all("h2", class_="text-xl font-bold")
-        tests = soup.find_all("div", class_ = "px-4 py-2 space-y-1")
-
-        topic_counts = {}
-
-        for topic, test in zip(topics, tests):
-            topic_name = topic.text
-            question_count = len(test.find_all("p", class_="font-bold"))
-            topic_counts[topic_name] = question_count
-
-        topic_elements = []
-        for i in range(len(topics)):
-            for _ in range(topic_counts[topics[i].text]):
-                topic_elements.append(topics[i].text)
-
-        qa_pairs = [{"question": question, "answer": answer, "topic": topic} for question, answer, topic in zip(questions, answers, topic_elements)]
-        collection.insert_many(qa_pairs)
+       
+        collection.insert_many(articles)
 
         cnt = collection.count_documents({})
         return json.loads(json_util.dumps({"status":'success',"cnt":cnt})),200
@@ -104,6 +118,12 @@ def delete():
         "deleted_count" : result.deleted_count
     }, 200
 
+@app.get('/<id>')
+
+
+def get_data_by_id(id):
+    data = collection.find_one({"_id": ObjectId(id)})
+    return json.loads(json_util.dumps(data)),200
 
 
 
