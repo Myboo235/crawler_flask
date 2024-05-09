@@ -4,7 +4,6 @@ services:
   mongo:
     image: mongo
     container_name: crawler_mongo
-    restart: always
     ports:
       - 27017:27017
     environment:
@@ -14,7 +13,6 @@ services:
   mongo-express:
     image: mongo-express
     container_name: crawler_mongo-express
-    restart: always
     ports:
       - 8081:8081
     environment:
@@ -27,7 +25,6 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
-    restart: always
     ports:
       - 5000:5000
     depends_on:
@@ -36,3 +33,16 @@ services:
       MONGO_URI: mongodb://root:root@mongo:27017/
     volumes:
       - "./api:/flask/"
+
+  vue:
+    build:
+      context: .
+      dockerfile: vue_starter/Dockerfile
+    ports:
+      - 5173:5173
+    depends_on:
+      - api
+    environment:
+      MONGO_URI: mongodb://root:root@mongo:27017/
+    volumes:
+      - "./vue_starter:/app/"

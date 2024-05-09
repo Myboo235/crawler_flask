@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "ques": "What is the capital of France?",
+        "ans": "The capital of France is Paris.",
+        "topic": "Geography"
+    },
+    {
+        "id": 2,
+        "ques": "Who wrote 'To Kill a Mockingbird'?",
+        "ans": "Harper Lee wrote 'To Kill a Mockingbird'.",
+        "topic": "Literature"
+    },
+    {
+        "id": 3,
+        "ques": "What is the powerhouse of the cell?",
+        "ans": "The powerhouse of the cell is the mitochondria.",
+        "topic": "Biology"
+    },
+    {
+        "id": 4,
+        "ques": "What is the tallest mountain on Earth?",
+        "ans": "Mount Everest is the tallest mountain on Earth.",
+        "topic": "Geography"
+    },
+    {
+        "id": 5,
+        "ques": "Who painted the Mona Lisa?",
+        "ans": "Leonardo da Vinci painted the Mona Lisa.",
+        "topic": "Art"
+    }
+]
