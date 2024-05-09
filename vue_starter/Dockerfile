@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-alpine
+FROM --platform=linux/amd64 node:lts-alpine
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ COPY ./vue_starter/package*.json /app
 
 RUN cd /app && npm install
 
-COPY ./vue_starter/* /app
+COPY ./vue_starter /app
 
 EXPOSE 5173
 
