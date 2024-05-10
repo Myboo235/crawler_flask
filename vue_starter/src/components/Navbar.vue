@@ -21,7 +21,10 @@ export default {
     <div
         class="grid lg:grid-cols-3 grid-cols-2  justify-center items-center w-full bg-[#292523] h-[4rem] text-secondary">
         <div class="text-xl cursor-pointer mr-auto ml-5">
-            <RouterLink to="/">LeNhut.</RouterLink>
+            <RouterLink to="/">
+                <!-- LeNhut. -->
+                Blog.
+            </RouterLink>
 
         </div>
         <nav class="lg:flex justify-center items-center h-full hidden bg-tertiary rounded-b-[2rem]">

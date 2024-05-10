@@ -7,82 +7,27 @@ import json
 import requests
 from bs4 import BeautifulSoup  as bs
 from uuid import uuid1
+from flask_cors import CORS 
 
+# Flask
 app = Flask(__name__)
-
+cors = CORS(app)
+# MongoDB
 client = MongoClient("mongodb://root:root@mongo:27017/")
-
 db = client['crawl']
 collection = db['crawl_data']
-url = "https://spaceandbeyondbox.com/the-space-and-beyond-blog/"
-soup = bs(requests.get(url).content, "html.parser")
 
-
-def clean_text(texts):
-    for i in range(len(texts)):
-        texts[i] = texts[i].text.strip()
-    return texts
-   
-   
-def get_data(url):
-     
-    subpage_soup = bs(requests.get(url).content, "html.parser")
-    subpage_content = clean_text(subpage_soup.find("div", class_="entry-content").find_all("p"))
-    subpage_title = subpage_soup.find("div", class_="entry-content").find("h1").text.strip()
-    subpage_img = subpage_soup.find("span", class_="et_pb_image_wrap").find("img")["src"]
-    
-    return subpage_title, subpage_img, subpage_content
-
-
-@app.get('/')
+@app.get('/health_check')
 def index():
     return json.loads(json_util.dumps({"health_status":'oke',})),200
 
-
-@app.route('/crawl')
-def crawl():
-    cnt = db['crawl_data'].count_documents({})
-    if cnt > 0:
-        return json.loads(json_util.dumps({"status":'success',"cnt":cnt})),200
-    try:
-        articles = []
-        for article in soup.find_all("article"):
-            # img = article.find("img")["src"]
-            # title = article.find("h2").text
-            # content = article.find("p").text
-            subpage = article.find("a")["href"]
-        
-            data = get_data(subpage)
-        
-
-            articles.append({
-                # "title": title,
-                # "img": img,
-                # "content": content,
-                # "subpage": {
-                    "title": data[0],
-                    "img": data[1],
-                    "content": data[2]
-                # }
-            })
-        
-
-
-       
-        collection.insert_many(articles)
-
-        cnt = collection.count_documents({})
-        return json.loads(json_util.dumps({"status":'success',"cnt":cnt})),200
-    except Exception as e:
-        print(e)
-        return json.loads(json_util.dumps({"status":'failed'})),500
-    
-@app.route('/crawl_data')
-def crawl_data():
-    data = collection.find() 
+@app.route('/')
+def get_data():
+    data = collection.find().sort({"_id":-1}) 
     data_list = list(data)
 
     return json.loads(json_util.dumps(data_list)),200
+
 @app.post('/create')
 def insert_data():
     content = dict(request.json)
@@ -119,11 +64,9 @@ def delete():
     }, 200
 
 @app.get('/<id>')
-
-
 def get_data_by_id(id):
-    data = collection.find_one({"_id": ObjectId(id)})
-    return json.loads(json_util.dumps(data)),200
+    result = collection.find_one({"_id": ObjectId(id)})
+    return json.loads(json_util.dumps(result)),200
 
 
 

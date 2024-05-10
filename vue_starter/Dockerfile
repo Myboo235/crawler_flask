@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY ./vue_starter/package*.json /app
 
-RUN cd /app && npm install
+RUN cd /app && npm install --loglevel verbose
 
 COPY ./vue_starter /app
 

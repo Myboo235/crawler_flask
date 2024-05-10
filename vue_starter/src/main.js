@@ -13,6 +13,8 @@ import { MotionPlugin } from "@vueuse/motion";
 
 import VueKinesis from "vue-kinesis";
 
+import '../node_modules/flowbite-vue/dist/index.css'
+
 const Fa = Object.values({ ...FaIcons });
 const Oi = Object.values({ ...OiIcons });
 const Bi = Object.values({ ...BiIcons });

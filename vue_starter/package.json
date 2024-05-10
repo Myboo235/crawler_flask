@@ -11,6 +11,8 @@
   "dependencies": {
     "@vueuse/motion": "^2.0.0",
     "axios": "^1.6.8",
+    "flowbite": "^2.3.0",
+    "flowbite-vue": "^0.1.4",
     "oh-vue-icons": "^1.0.0-rc3",
     "react-icons": "^5.0.1",
     "vue": "^3.3.11",

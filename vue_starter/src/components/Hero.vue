@@ -13,31 +13,31 @@
                 <div
                     class="xl:bg-white/70 lg:py-5 rounded-[2rem] lg:pl-5 lg:absolute lg:-left-[5rem] lg:max-w-[30rem] lg:border-2 lg:border-primary lg:shadow-lg lg:shadow-black">
                     <div class="px-4 flex">
-                        <div>Trending now</div>
-                        <div class="ml-auto">1/13/2024</div>
+                        <!-- <div>Trending now</div> -->
+                        <!-- <div class="ml-auto">1/13/2024</div> -->
                     </div>
                     <div class="px-4 lg:flex lg:flex-col gap-5">
                         <h3
                             class="text-xl md:text-2xl xl:text-4xl lg:text-3xl font-bold text-primary hover:opacity-80 cursor-pointer transition-all duration-500">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, tenetur!
+                            Welcome to our space blog 
                         </h3>
 
                         <p class="font-[300]">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi aut cumque ipsum cum,
-                            dolores animi cupiditate, provident magnam inventore fugiat numquam asperiores voluptates
-                            nemo
-                            velit quis? Neque qui suscipit hic autem eaque sint magnam reiciendis consectetur modi,
-                            pariatur
-                            nobis ipsum.
+                            Welcome to the captivating realm of celestial wonders! J
+                            oin me on an awe-inspiring journey through the vast expanse of space, 
+                            where stars ignite our imaginations and galaxies unveil their secrets. 
+                            From mesmerizing nebulae to enigmatic black holes, 
+                            let's explore the mysteries and beauty that lie beyond Earth's boundaries. 
+                            Embark on an interstellar adventure as we delve into the cosmos and uncover the marvels that await us.
                         </p>
                     </div>
 
-                    <div class="px-4 flex items-center gap-2 cursor-pointer">
+                    <!-- <div class="px-4 flex items-center gap-2 cursor-pointer">
                         <div
                             class="w-[2rem] h-[2rem] rounded-full bg-[url(https://cdn.pixabay.com/photo/2023/05/16/13/14/ai-generated-7997537_1280.jpg)] bg-cover">
                         </div>
                         <p class="hover:underline">Clare Moreo</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

@@ -11,4 +11,4 @@ COPY ./api/ .
 
 EXPOSE 5000
 
-CMD flask run --host=0.0.0.0 --debug
+CMD python crawl.py && flask run --host=0.0.0.0 --debug
