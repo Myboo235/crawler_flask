@@ -10,21 +10,15 @@ export default {
 
         axios.get('http://localhost:5000/')
             .then(response => {
-                articles.value = response.data
+                articles.value = response.data.slice(0,6)
                 console.log(response.data)
             })
             .catch(error => {
             console.error('Error fetching data:', error);
             });
 
-        const title = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, ea.";
-        const thumb = "https://cdn.pixabay.com/photo/2023/05/16/13/14/ai-generated-7997537_1280.jpg";
-        const content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quasi eligendi eos aliquam autem debitis exercitationem iure at culpa, voluptates vitae provident quod rerum unde vero explicabo deserunt, velit sequi.";
-        const time = "1/13/2024";
-        const author = "Clare Moreo";
-        const avatar = "https://cdn.pixabay.com/photo/2023/05/16/13/14/ai-generated-7997537_1280.jpg";
         return {
-            title, thumb, content, time, author, avatar ,articles
+         articles
         };
     },
     components: { Circle , Astronaut }
@@ -36,7 +30,11 @@ export default {
     <div class="bg-tertiary relative py-[5rem]">
         <div class="">
             <div class=" w-full flex justify-center mb-8">
-                <button class="px-[8rem] py-[2rem] bg-gradient-to-r from-secondary to-pink-200 border-white border-2 rounded-2xl text-lg hover:scale-105 duration-500 transition text-white hover:to-pink-400">Click here to create new blog 🚀</button>
+                <RouterLink to="/create" class="px-[2rem] xl:px-[8rem] py-[2rem] bg-gradient-to-r from-secondary to-pink-200 border-white border-2 rounded-2xl text-2xl hover:scale-105 duration-500 transition text-white hover:to-pink-400">
+                    <button >
+                         Click here to create new blog 🚀
+                    </button>
+                </RouterLink>
             </div>
             <h2 class="px-8 pb-8 text-6xl font-bold lg:my-[4rem] cursor-pointer">Top Article.</h2>
             <div class="px-4 lg:px-8 grid md:grid-cols-2 justify-center items-center gap-[5rem] md:gap-y-[5rem] lg:w-3/4">
@@ -59,12 +57,19 @@ export default {
                             </button>
                     
                         </div>
-                        <div class="bg-white group-hover:bg-primary p-4 rounded-r-[1rem] rounded-b-[1rem] h-full flex justify-center duration-300 shadow-[0_5px_15px] [clip-path:inset(-10px_-10px_-10px_0px)]">
+                        <div class="bg-white group-hover:bg-primary p-4 rounded-r-[1rem] rounded-b-[1rem] h-full flex justify-center duration-300 shadow-[0_10px_15px] [clip-path:inset(-10px_-10px_-10px_0px)]">
                             <img v-bind:src="a.img[0]" alt="" class="rounded-[1rem] object-cover group-hover:scale-105 duration-500 h-[10rem] w-[12rem]">
                         </div>
                     </div>
                 </div>
                 
+            </div>
+            <div class="flex justify-center m-8">
+                <RouterLink to="/articles" class="px-[2rem] xl:px-[8rem] py-[1rem] bg-gradient-to-r from-secondary to-blue-200 border-white border-2 rounded-2xl text-xl hover:scale-105 duration-500 transition text-white hover:to-blue-400">
+                    <button >
+                         View all blog
+                    </button>
+                </RouterLink>
             </div>
         </div>
         

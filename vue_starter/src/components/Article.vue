@@ -18,7 +18,7 @@ const content = ref("");
 const error_msg = ref("none")
 
 const id = (route.params.id)
-axios.get(`http://localhost:5000/${id}`)
+axios.get(`http://localhost:5000/data/${id}`)
     .then(response => {
         const responseData = response.data;
         console.log(response.data)
@@ -114,5 +114,8 @@ const deleteArticle = () => {
     100% {
         transform: translateY(0);
     }
+}
+.overflow-hidden.relative.h-56.rounded-lg{
+    min-height: 500px !important;
 }
 </style>

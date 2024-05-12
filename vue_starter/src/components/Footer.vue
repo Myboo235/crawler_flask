@@ -2,7 +2,10 @@
     <div class="">
         <div class="bg-secondary grid grid-cols-2 p-5 pb-[8rem]">
             <div class="flex flex-col gap-2">
-                <div class="font-bold cursor-pointer hover:underline text-xl">LeNhut.</div>
+                <div class="font-bold cursor-pointer hover:underline text-xl">
+                    <!-- LeNhut. -->
+                    Blog.
+                </div>
                 <div class="cursor-pointer hover:underline">gmail@gmail.com</div>
                 <div>(000)0000-000</div>
                 <div class="flex items-center gap-2 cursor-pointer">
@@ -21,7 +24,8 @@
             </div>
         </div>
         <div class="bg-secondary">
-            @2024 LENHUT.
+            <!-- @2024 LENHUT. -->
+            @2024 BLOG.
         </div>
     </div>
 </template>

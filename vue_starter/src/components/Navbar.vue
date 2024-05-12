@@ -29,7 +29,8 @@ export default {
         </div>
         <nav class="lg:flex justify-center items-center h-full hidden bg-tertiary rounded-b-[2rem]">
             <ul class="flex items-center text-primary gap-[2rem]">
-                <li class="cursor-pointer rounded-xl hover:bg-secondary hover:text-primary p-[0.5rem] duration-300">Work
+                <li class="cursor-pointer rounded-xl hover:bg-secondary hover:text-primary p-[0.5rem] duration-300">
+                    Work
                 </li>
                 <li class="cursor-pointer rounded-xl hover:bg-secondary hover:text-primary p-[0.5rem] duration-300">
                     Project</li>

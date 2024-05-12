@@ -5,7 +5,7 @@ import MainLayout from '../layouts/MainLayout.vue';
 import Subscribe from '../components/Subscribe.vue';
 import Topics from '../components/Topics.vue';
 import CustomCursor from '../components/CustomCursor.vue'
-
+import axios from 'axios';
 const childrenComponents = [Hero, Article, Subscribe]; 
 </script>
 
@@ -14,9 +14,8 @@ const childrenComponents = [Hero, Article, Subscribe];
     <div class="flex justify-center flex-col bg-[#292523] overflow-y-hidden">
         <!-- {{ $route.fullPath }} -->
         <!-- <RouterLink to="/article/1">Go to article</RouterLink> -->
-        
+
         <MainLayout :childrens="childrenComponents" />
-        
     </div>
 
 </template>

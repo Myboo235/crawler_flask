@@ -17,11 +17,25 @@ client = MongoClient("mongodb://root:root@mongo:27017/")
 db = client['crawl']
 collection = db['crawl_data']
 
+
+@app.post('/crawl_generate')
+def get_crawl_text():
+    keyword = request.json.get("keyword","_default") 
+    from generate_blog import generate_blog_post_crawl
+    return jsonify(generate_blog_post_crawl(keyword=keyword)), 200
+
+@app.post('/text_generate')
+def get_generated_text():
+    keyword = request.json.get("keyword","_default") 
+    from generate_blog import generate_blog_post_transformers
+    return jsonify(generate_blog_post_transformers(keyword=keyword)), 200
+
+
 @app.get('/health_check')
 def index():
     return json.loads(json_util.dumps({"health_status":'oke',})),200
 
-@app.route('/')
+@app.get('/')
 def get_data():
     data = collection.find().sort({"_id":-1}) 
     data_list = list(data)
@@ -30,9 +44,9 @@ def get_data():
 
 @app.post('/create')
 def insert_data():
-    content = dict(request.json)
+    req = dict(request.json)
 
-    result_id = collection.insert_one(content).inserted_id
+    result_id = collection.insert_one(req).inserted_id
 
     return json.loads(json_util.dumps({
         "status": "Success",
@@ -41,11 +55,11 @@ def insert_data():
 
 @app.post('/update')
 def update_data():
-    content = dict(request.json)
-    _id = content.get("_id","")
-    content.pop("_id")
+    req = dict(request.json)
+    _id = req.get("_id","")
+    req.pop("_id")
 
-    result = collection.update_one({"_id": ObjectId(_id)}, {"$set": content})    
+    result = collection.update_one({"_id": ObjectId(_id)}, {"$set": req})    
     return json.loads(json_util.dumps({
         "status": "Success",
         "update_count" : result.modified_count
@@ -55,7 +69,7 @@ def update_data():
 
 @app.post('/delete')   
 def delete():
-    _id = request.json.get("_id") 
+    _id = request.json.get("_id","") 
     result = collection.delete_one({"_id": ObjectId(_id)})
  
     return {
@@ -63,7 +77,7 @@ def delete():
         "deleted_count" : result.deleted_count
     }, 200
 
-@app.get('/<id>')
+@app.get('/data/<id>')
 def get_data_by_id(id):
     result = collection.find_one({"_id": ObjectId(id)})
     return json.loads(json_util.dumps(result)),200
