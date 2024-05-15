@@ -11,10 +11,9 @@ export default {
         axios.get('http://localhost:5000/')
             .then(response => {
                 articles.value = response.data.slice(0,6)
-                console.log(response.data)
             })
             .catch(error => {
-            console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error);
             });
 
         return {
@@ -43,7 +42,7 @@ export default {
                         <div class="grid grid-rows-3 gap-5 cursor-pointer ">
                             <div class="bg-white rounded-l-[1rem] p-[0.67rem] lg:text-sm text-lg row-span-3 group-hover:bg-primary group-hover:text-white duration-300 shadow-lg shadow-black">
                                 <p>{{ a.title }}</p>
-                                <span class="lg:pt-4">{{ time }}</span>
+                                <!-- <span class="lg:pt-4">{{ time }}</span> -->
                             </div>
                             <button>
                                 <RouterLink :to="'/article/'+a._id.$oid" class="row-span-1 mt-auto mb- flex justify-center items-center bg-secondary mx-4 rounded-[2rem] hover:scale-105 transition-all duration-200 cursor-pointer group border-2 border-primary shadow-lg shadow-black">

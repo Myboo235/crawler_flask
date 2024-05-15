@@ -1,10 +1,10 @@
 <template>
-    <div class="fixed w-full px-[1rem] top-10 2xl:mx-[30rem]" v-if="error_msg !== 'none'">
-        <fwb-alert border type="danger" closable>
+    <div class="fixed w-full px-[1rem] top-10 xl:px-[30rem]" v-if="error_msg !== 'none'">
+        <fwb-alert border type="danger" closable class="px-4">
             {{ error_msg }}
         </fwb-alert>
     </div>
-    <div class="fixed w-full px-[1rem] top-10 2xl:mx-[30rem]" v-if="info_msg !== 'none'">
+    <div class="fixed w-full px-[1rem] top-10 xl:px-[30rem]" v-if="info_msg !== 'none'">
         <fwb-alert border type="warning" closable>
             {{ info_msg }}
             <fwb-spinner />
@@ -27,7 +27,7 @@
                         </div>
                         <div class="flex flex-col gap-2 bg-gray-300 p-2 rounded-xl">
                             <fwb-progress :progress="90" color="blue" label="crawl" />
-                            <fwb-progress :progress="20" color="yellow" label="transforms model" class="text-white" />
+                            <fwb-progress :progress="8" color="yellow" label="transforms model" class="text-white" />
                         </div>
 
                     </li>
@@ -60,8 +60,9 @@
             </div>
         </template>
     </fwb-modal>
-    <div class="mt-[5rem] p-10 2xl:mx-[30rem]">
-        <form class="mx-auto text-primary text-white">
+    <h2 class="text-white px-8 text-6xl font-bold lg:my-[4rem] cursor-pointer">Create Article.</h2>
+    <div class="my-[5rem] p-10 2xl:mx-[30rem] bg-tertiary rounded-2xl">
+        <form class="mx-auto text-primary text-primary">
             <div class="mb-10 flex flex-col gap-2">
                 <label for="title" class="mb-2 text-2xl">Title</label>
                 <textarea type="text" id="title"
@@ -133,21 +134,15 @@ const streamInterval = 10;
 
 const id = (route.params.id)
 const props = defineProps(["type"])
-console.log(props.type)
 
 
 if (props.type === "update") {
     axios.get(`http://localhost:5000/data/${id}`)
         .then(response => {
             const responseData = response.data;
-            console.log(response.data)
             title.value = responseData.title;
             content.value = responseData.content.join("\n");
             imgs.value = responseData.img.join("\n");
-
-
-
-            console.log(imgs.value);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -164,9 +159,6 @@ function showModal(type) {
 
 const onSubmit = () => {
     error_msg.value = "none"
-    console.log(title.value)
-    console.log(imgs.value.split("\n"))
-    console.log(content.value.split("\n"))
     if (props.type === "update") {
         axios.post('http://localhost:5000/update', {
             "_id": id,
@@ -176,7 +168,6 @@ const onSubmit = () => {
 
         })
             .then(response => {
-                console.log(response.data);
                 router.push('/');
             })
             .catch(error => {
@@ -191,7 +182,6 @@ const onSubmit = () => {
 
         })
             .then(response => {
-                console.log(response.data);
                 router.push('/');
             })
             .catch(error => {
@@ -229,12 +219,9 @@ const autoGenerate = () => {
     })
         .then(response => {
             const responseData = response.data;
-            console.log(response.data)
             content_generated_data = responseData.content_output
             title_generated_data = responseData.title_output
             imgs_generated_data = responseData.imgs.join("\n")
-
-            console.log(content_generated_data)
             info_msg.value = "none"
             const intervalId = setInterval(() => {
                 if (content_generated_index < content_generated_data.length) {
@@ -262,6 +249,9 @@ const autoGenerate = () => {
 
         })
         .catch(error => {
+            info_msg.value = "none"
+            error_msg.value = error
+            isDisable.value = false;
             console.error('Error fetching data:', error);
         });
 

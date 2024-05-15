@@ -13,7 +13,7 @@ def get_url_by_keyword(keyword):
     query = keyword + " wiki"
 
     urls = []
-    for j in search(query, tld="co.in", num=4, stop=1, pause=1): 
+    for j in search(query, num=4, stop=1, pause=1): 
         urls.append(j) 
     random.shuffle(urls)
     return urls
@@ -42,7 +42,6 @@ def scrape_text_and_images(urls):
             all_image_urls.extend(image_urls)
         except Exception as e:
             pass
-    print(all_image_urls)
     return all_text.strip(), all_image_urls
 
 def is_valid_image_url(image_url):
@@ -94,16 +93,23 @@ def generate_blog_post_transformers(keyword):
     generator = pipeline('text-generation')
 
 
-    title = f"A topic about {keyword.capitalize()}"
-    content = title
+    title = f"{keyword.capitalize()}"
 
     def generate_data(context, length=20):
-        output = generator(context, max_length=length, do_sample=True, temperature=0.9)
+        output = generator(context, max_length=length, do_sample=True, temperature=0.9,num_return_sequences=4)
         return output[0]["generated_text"]
 
     def generate_outputs():
-        title_output = generate_data(title)
-        content_output = generate_data(content, 200)
+        output = generate_data(title, 300)
+        sentences = output.split(".")
+        sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+
+        if sentences[-1].endswith("."):
+            sentences[-1] = sentences[-1][:-1]
+
+        title_output = sentences[0]
+        content_output = ". ".join(sentences)
+
         imgs = bing_image_urls(keyword, limit=4)
 
         return {"title_output": title_output, "content_output": content_output, "imgs" : imgs}

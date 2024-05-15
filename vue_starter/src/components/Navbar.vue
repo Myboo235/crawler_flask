@@ -8,7 +8,6 @@ export default {
         const showMenu = ref(false)
 
         const toggleMenu = () => {
-            console.log(showMenu.value);
             showMenu.value = !showMenu.value
         }
         return { date, count, showMenu, toggleMenu }
@@ -23,7 +22,7 @@ export default {
         <div class="text-xl cursor-pointer mr-auto ml-5">
             <RouterLink to="/">
                 <!-- LeNhut. -->
-                Blog.
+                AI.Blog
             </RouterLink>
 
         </div>

@@ -21,7 +21,6 @@ const id = (route.params.id)
 axios.get(`http://localhost:5000/data/${id}`)
     .then(response => {
         const responseData = response.data;
-        console.log(response.data)
         title.value = responseData.title;
         content.value = responseData.content;
 
@@ -29,7 +28,6 @@ axios.get(`http://localhost:5000/data/${id}`)
             imgs.value.push({ "src": i })
         })
 
-        console.log(imgs.value);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -41,7 +39,6 @@ const deleteArticle = () => {
         "_id": id,
     })
         .then(response => {
-            console.log(response.data);
             router.push('/');
         })
         .catch(error => {
@@ -76,7 +73,7 @@ const deleteArticle = () => {
             </div>
             <div class="w-full h-1 my-4 bg-primary" />
 
-            <fwb-carousel :pictures="imgs" />
+            <fwb-carousel :pictures="imgs"/>
             <!-- <img v-bind:src="image" alt="" class="rounded-[1rem] object-cover group-hover:scale-105 duration-500 "> -->
             <div class="w-full h-1 my-4 bg-primary" />
             <div class="h-[50vh] overflow-auto mt-4">
@@ -114,8 +111,5 @@ const deleteArticle = () => {
     100% {
         transform: translateY(0);
     }
-}
-.overflow-hidden.relative.h-56.rounded-lg{
-    min-height: 500px !important;
 }
 </style>

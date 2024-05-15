@@ -9,7 +9,7 @@
                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white h-[4rem]">
                             {{ a.title.slice(0, 40)}}....
                         </h5>
-                        <img :src="a.img[0]" alt="" class="h-[10rem] w-full object-cover my-4">
+                        <img :src="a.img[0]" alt="" class="h-[10rem] w-full object-cover my-4 rounded-xl">
                         <p class="font-normal text-gray-700 dark:text-gray-400 h-[5rem]">
                             {{ a.content.join("").slice(0, 100) }}....
                         </p>
@@ -44,7 +44,6 @@ const articles = ref([]);
 axios.get('http://localhost:5000/')
     .then(response => {
         articles.value = response.data
-        console.log(response.data)
     })
     .catch(error => {
         console.error('Error fetching data:', error);

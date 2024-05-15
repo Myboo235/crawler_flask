@@ -40,10 +40,8 @@ services:
       dockerfile: vue_starter/Dockerfile
     ports:
       - 5173:5173
-    # depends_on:
-    #   - api
-    environment:
-      MONGO_URI: mongodb://root:root@mongo:27017/
+    depends_on:
+      - api
     volumes:
       - "./vue_starter/src:/app/src"
       - "./vue_starter/package.json:/app/package.json"

@@ -1,7 +1,6 @@
 <script setup>
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
-import CustomCursor from '../components/CustomCursor.vue'
 import Form from '../components/Form.vue'
 
 </script>

@@ -4,7 +4,6 @@ import Article from '../components/Articles.vue';
 import MainLayout from '../layouts/MainLayout.vue';
 import Subscribe from '../components/Subscribe.vue';
 import Topics from '../components/Topics.vue';
-import CustomCursor from '../components/CustomCursor.vue'
 import axios from 'axios';
 const childrenComponents = [Hero, Article, Subscribe]; 
 </script>
