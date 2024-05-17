@@ -18,20 +18,20 @@ class GenreByCrawlData(unittest.TestCase):
 
         
     def test_case1(self):
-        crawl_btn = self.driver.find_element(By.ID, 'crawl_submit')
-        crawl_btn.click()
+        model_gpt2 = self.driver.find_element(By.ID, 'gpt2_submit')
+        model_gpt2.click()
         
         time.sleep(5)
         
         
         key_word = self.driver.find_element(By.ID, 'keyword')
-        key_word.send_keys('messi')
+        key_word.send_keys('ronaldo')
         time.sleep(2)
         
         generate_btn = self.driver.find_element(By.ID, 'generate_data')
         generate_btn.click()
         
-        time.sleep(40)
+        time.sleep(120)
         
         submit = self.driver.find_element(By.ID, 'submit')
         submit.click()

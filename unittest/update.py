@@ -10,69 +10,79 @@ class Update(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('http://localhost:5173')
-        self.driver.implicitly_wait(10)
+        self.driver.maximize_window() 
+  
         
-    def tearDown(self):
-        self.driver.close()
         
         
         
     def test_case1(self):
-     
-        view_more_btn = self.driver.find_element_by_xpath("//button[contains(text(), 'View more')]")
+        view_more_btn = self.driver.find_element(By.ID, 'view_more')
         view_more_btn.click()
-        time.sleep(1)
+        time.sleep(3)
         
-        update_btn = self.driver.find_element_by_xpath("//button[contains(text(), 'update')]")
+        update_btn = self.driver.find_element(By.ID, 'update_btn')
         update_btn.click()
+        time.sleep(3)
         
-        title = self.driver.find_element_by_xpath("//input[@name='title']")
+        
+        title = self.driver.find_element(By.ID, 'title')
         title.clear()
+        title.send_keys('Updated title')
         
-        title.send_keys('update test')
         
-        submit = self.driver.find_element_by_xpath("//button[@type='submit']")  
-        submit.click()
+        submit_btn = self.driver.find_element(By.ID, 'update_submit')
+        submit_btn.click()
+        time.sleep(3)
         
-        if self.driver.current_url == 'http://localhost:5173/':
-            test_results.append('Pass')
+        
+        current_url = self.driver.current_url
+        if current_url == 'http://localhost:5173/mainpage':
+            test_results.append( 'Pass')
         else:
             test_results.append('Fail')
             
     def test_case2(self):
-         
-            view_more_btn = self.driver.find_element_by_xpath("//button[contains(text(), 'View more')]")
-            view_more_btn.click()
-            time.sleep(1)
+        view_more_btn = self.driver.find_element(By.ID, 'view_more')
+        view_more_btn.click()
+        time.sleep(3)
+        
+        update_btn = self.driver.find_element(By.ID, 'update_btn')
+        update_btn.click()
+        time.sleep(3)
+        
+        
+        title = self.driver.find_element(By.ID, 'content')
+        title.clear()
+        title.send_keys('Updated content')
+        time.sleep(3)
+        
+        
+        submit_btn = self.driver.find_element(By.ID, 'update_submit')
+        submit_btn.click()
+        time.sleep(3)
+        
+        
+        current_url = self.driver.current_url
+        if current_url == 'http://localhost:5173/mainpage':
+            test_results.append( 'Pass')
+        else:
+            test_results.append('Fail')
+        
+        
+    def tearDown(self):
+        self.driver.close()
+     
             
-            update_btn = self.driver.find_element_by_xpath("//button[contains(text(), 'update')]")
-            update_btn.click()
-            
-            content = self.driver.find_element_by_xpath("//textarea[@name='content']")
-            content.clear()
-            content.send_keys('update test')
-            
-            submit = self.driver.find_element_by_xpath("//button[@type='submit']")  
-            submit.click()
-            
-            if self.driver.current_url == 'http://localhost:5173/':
-                test_results.append('Pass')
-            else:
-                test_results.append('Fail')
+   
         
             
 def print_test_results():
     print("\n\n\n")
+    print("======")
     print("Result")
-    for test_case_name, result in test_results:
-        if result:
-            print("========================================\n")
-            print(f"{test_case_name}\n")
-            print(f"Result : {result}\n\n")
-        else:
-            print("========================================\n")
-            print(f"{test_case_name}\n")
-            print(f"Result : {result}\n\n")
+    for i in range(len(test_results)):
+        print(f"Test case {i+1}: {test_results[i]}")
 
 
 def execute_tests():
