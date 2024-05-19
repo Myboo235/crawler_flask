@@ -60,12 +60,13 @@ const deleteArticle = () => {
             <div class="flex cursor-pointer bg-primary rounded-xl text-secondary items-center">
                 <h2 class="p-8 text-4xl lg:text-6xl font-bold lg:my-[4rem] text-secondary">{{ title }}</h2>
                 <div class="ml-auto flex flex-col gap-2">
-                    <button class="mr-4 px-2 bg-secondary text-primary h-[2rem] min-w-[5rem] rounded-lg">
+                    <button id = "update_btn"  class="mr-4 px-2 bg-secondary text-primary h-[2rem] min-w-[5rem] rounded-lg">
                         <RouterLink :to="'/update/' + $route.params.id">
                             update
                         </RouterLink>
                     </button>
-                    <button class="ml-auto mr-4 px-2 bg-red-400 text-primary h-[2rem] min-w-[5rem] rounded-lg"
+                    <button id = "delete_btn" class="ml-auto mr-4 px-2 bg-red-400 text-primary h-[2rem] min-w-[5rem] rounded-lg"
+                    
                         @click="deleteArticle">
                         delete
                     </button>

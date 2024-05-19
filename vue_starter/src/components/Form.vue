@@ -1,6 +1,6 @@
 <template>
     <div class="fixed w-full px-[1rem] top-10 xl:px-[30rem]" v-if="error_msg !== 'none'">
-        <fwb-alert border type="danger" closable class="px-4">
+        <fwb-alert border type="danger" id="error_msg" closable class="px-4">
             {{ error_msg }}
         </fwb-alert>
     </div>
@@ -54,7 +54,7 @@
                 <fwb-button @click="closeModal" color="alternative">
                     Cancel
                 </fwb-button>
-                <fwb-button @click="autoGenerate()" class="bg-primary">
+                <fwb-button @click="autoGenerate()" class="bg-primary" id = "generate_data" >
                     Generate ✍️
                 </fwb-button>
             </div>
@@ -88,16 +88,19 @@
         </form>
         <div class="flex gap-4" v-if="props.type !== 'update'">
             <button
+                id = "submit"
                 class="text-secondary bg-primary border-secondary border-2 hover:text-primary hover:bg-secondary rounded-lg p-4 justify-self-end"
                 @click="onSubmit()" :disabled="isDisable">
                 Submit your blog 🚀
             </button>
             <button
+                id = "crawl_submit"
                 class="text-secondary bg-primary border-secondary border-2 hover:text-primary hover:bg-secondary rounded-lg p-4 justify-self-end"
                 @click="showModal('crawl')" :disabled="isDisable">
                 Auto generate text by crawl data 🌎
             </button>
             <button
+                id = "gpt2_submit"
                 class="text-secondary bg-primary border-secondary border-2 hover:text-primary hover:bg-secondary rounded-lg p-4 justify-self-end"
                 @click="showModal('text')" :disabled="isDisable">
                 Auto generate text using model ✨
@@ -105,6 +108,7 @@
 
         </div>
         <button
+            id = "update_submit"
             class="text-secondary bg-primary border-secondary border-2 hover:text-primary hover:bg-secondary rounded-lg p-4 justify-self-end"
             @click="onSubmit()" v-else>
             Update your blog 🚀
@@ -159,6 +163,12 @@ function showModal(type) {
 
 const onSubmit = () => {
     error_msg.value = "none"
+    if (title.value === "" || imgs.value === "" || content.value === "") {
+        error_msg.value = "Please fill all the fields"
+
+        return
+    }
+
     if (props.type === "update") {
         axios.post('http://localhost:5000/update', {
             "_id": id,

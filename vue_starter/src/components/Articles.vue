@@ -44,9 +44,10 @@ export default {
                                 <p>{{ a.title }}</p>
                                 <!-- <span class="lg:pt-4">{{ time }}</span> -->
                             </div>
-                            <button>
+                            <button id = "view_more">
                                 <RouterLink :to="'/article/'+a._id.$oid" class="row-span-1 mt-auto mb- flex justify-center items-center bg-secondary mx-4 rounded-[2rem] hover:scale-105 transition-all duration-200 cursor-pointer group border-2 border-primary shadow-lg shadow-black">
-                                    <p class="flex items-center px-5 py-1">
+                                    <p class="flex items-center px-5 py-1"
+                                        >
                                         View more
                                     </p>
                                     <div class="">
