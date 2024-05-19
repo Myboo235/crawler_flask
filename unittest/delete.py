@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
 import unittest
@@ -15,11 +17,15 @@ class Delete(unittest.TestCase):
     
         
         
-    def test_case1(self):
+    def test_delete_acticle(self):
         view_more_btn = self.driver.find_element(By.ID, 'view_more')
         view_more_btn.click()
         
         time.sleep(3)
+
+        WebDriverWait(self.driver, 200).until(
+            EC.element_to_be_clickable((By.ID, 'delete_btn'))
+        )
         
         delete_btn = self.driver.find_element(By.ID, 'delete_btn')
         delete_btn.click()
@@ -38,15 +44,11 @@ class Delete(unittest.TestCase):
         self.driver.close()
         
         
-    
-            
-       
+
 def print_test_results():
-    print("\n\n\n")
-    print("======")
-    print("Result")
+    print('Test Results:')
     for i in range(len(test_results)):
-        print(f"Test case {i+1}: {test_results[i]}")
+        print(f'Test {i+1}: {test_results[i]}')
 
 
 def execute_tests():

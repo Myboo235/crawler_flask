@@ -15,7 +15,7 @@ test_results = []
 
 
 
-class Add(unittest.TestCase):
+class Create(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('http://localhost:5173/create')
@@ -24,7 +24,7 @@ class Add(unittest.TestCase):
         
     
         
-    def test_case1(self):
+    def test_response_when_fill_all(self):
         title = self.driver.find_element(By.ID, 'title')
         title.send_keys('test1')
         
@@ -36,7 +36,7 @@ class Add(unittest.TestCase):
         
         submit = self.driver.find_element(By.ID, 'submit')
         submit.click()
-        
+                
         time.sleep(3)
         
         current_url = self.driver.current_url
@@ -46,16 +46,30 @@ class Add(unittest.TestCase):
             test_results.append('Fail')
             
         
+    def test_response_when_not_fill_title(self):
+        title = self.driver.find_element(By.ID, 'title')
+        title.send_keys('test1')
+
+        submit = self.driver.find_element(By.ID, 'submit')
+        submit.click()
+
+        time.sleep(3)
         
+        current_url = self.driver.current_url
+        if current_url == 'http://localhost:5173/create':
+            test_results.append('Pass')
+        else:
+            test_results.append('Fail')    
       
     
-    def test_case2(self):
+    def test_response_when_not_fill_anything(self):
         submit = self.driver.find_element(By.ID, 'submit')
         submit.click()
         
-        time.sleep(5)
+        time.sleep(3)
+
         current_url = self.driver.current_url
-        if current_url == 'http://localhost:5173/mainpage':
+        if current_url == 'http://localhost:5173/create':
             test_results.append('Pass')
         else:
             test_results.append('Fail')
