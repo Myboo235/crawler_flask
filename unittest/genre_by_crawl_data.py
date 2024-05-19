@@ -31,6 +31,8 @@ class GenreByCrawlData(unittest.TestCase):
         key_word = self.driver.find_element(By.ID, 'keyword')
         key_word.send_keys('messi')
         
+        time.sleep(2)
+        
         generate_btn = self.driver.find_element(By.ID, 'generate_data')
         generate_btn.click()
         
@@ -44,9 +46,9 @@ class GenreByCrawlData(unittest.TestCase):
         time.sleep(5)
         
         if self.driver.current_url == 'http://localhost:5173/mainpage':
-            test_results.append('Pass')
+            test_results.append('test generate data blog by crawl     - PASSED')
         else:
-            test_results.append('Fail')
+            test_results.append('test generate data blog by crawl     - FAILED')
             
     def tearDown(self):
         self.driver.close()

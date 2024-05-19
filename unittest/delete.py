@@ -35,9 +35,10 @@ class Delete(unittest.TestCase):
         
         current_url = self.driver.current_url
         if current_url == 'http://localhost:5173/mainpage':
-            test_results.append('Pass')
+            test_results.append('test delete acticle                  - PASSED')
+
         else:
-            test_results.append('Fail')
+            test_results.append('test delete acticle                  - FAILED')
             
             
     def tearDown(self):

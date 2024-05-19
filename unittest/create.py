@@ -1,11 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
-import unittest
-
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+import unittest
 
 
 
@@ -41,9 +39,10 @@ class Create(unittest.TestCase):
         
         current_url = self.driver.current_url
         if current_url == 'http://localhost:5173/mainpage':
-            test_results.append('Pass')
+            test_results.append('test response when fill all          - PASSED')
         else:
-            test_results.append('Fail')
+            test_results.append('test response when fill all          - FAILED')
+
             
         
     def test_response_when_not_fill_title(self):
@@ -57,9 +56,9 @@ class Create(unittest.TestCase):
         
         current_url = self.driver.current_url
         if current_url == 'http://localhost:5173/create':
-            test_results.append('Pass')
+            test_results.append('test response when not fill title    - PASSED')
         else:
-            test_results.append('Fail')    
+            test_results.append('test response when not fill title    - FAILED')    
       
     
     def test_response_when_not_fill_anything(self):
@@ -70,9 +69,9 @@ class Create(unittest.TestCase):
 
         current_url = self.driver.current_url
         if current_url == 'http://localhost:5173/create':
-            test_results.append('Pass')
+            test_results.append('test response when not fill anything - PASSED')
         else:
-            test_results.append('Fail')
+            test_results.append('test response when not fill anything - FAILED')
        
        
 
