@@ -60,7 +60,8 @@
             </div>
         </template>
     </fwb-modal>
-    <h2 class="text-white px-8 text-6xl font-bold lg:my-[4rem] cursor-pointer">Create Article.</h2>
+    <h2 class="text-white px-8 text-6xl font-bold lg:my-[4rem] cursor-pointer" v-if="props.type !== 'update'">Create Article.</h2>
+    <h2 class="text-white px-8 text-6xl font-bold lg:my-[4rem] cursor-pointer" v-else>Update Article.</h2>
     <div class="my-[5rem] p-10 2xl:mx-[30rem] bg-tertiary rounded-2xl">
         <form class="mx-auto text-primary text-primary">
             <div class="mb-10 flex flex-col gap-2">

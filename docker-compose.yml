@@ -24,7 +24,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: api/Dockerfile_compose
     ports:
       - 5000:5000
     depends_on:
