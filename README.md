@@ -20,47 +20,8 @@
     └── README.md
 ```
 ## Demo video
-### Preview
+[Link drive to video](https://drive.google.com/file/d/1ocpsVf_rzDIqzVqZMxFTz7JSIHfDggr5/view?usp=drive_link)
 
-[preview](./video/preview.mp4)
-
-<video width="100%" height="auto" controls>
-  <source src="./video/preview.mp4" type="video/mp4">
-</video>
-
-### Create by hand
-
-[create_by_hand](./video/create_by_hand.mp4)
-
-<video width="100%" height="auto" controls>
-  <source src="./video/create_by_hand.mp4" type="video/mp4">
-</video>
-
-### Update & delete
-
-[update&delete](./video/update&delete.mp4)
-
-
-<video width="100%" height="auto" controls>
-  <source src="./video/update&delete.mp4" type="video/mp4">
-</video>
-
-### Create by crawl data (faster)
-
-[create_by_crawl](./video/create_by_crawl.mp4)
-
-
-<video width="100%" height="auto" controls>
-  <source src="./video/create_by_crawl.mp4" type="video/mp4">
-</video>
-
-### Create by crawl data (more creative)
-
-[create_by_gpt2](./video/create_by_gpt2.mp4)
-
-<video width="100%" height="auto" controls>
-  <source src="./video/create_by_gpt2.mp4" type="video/mp4">
-</video>
 
 
 ## How to run
